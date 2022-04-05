@@ -1,12 +1,12 @@
 export enum DeviceType {
-    SC = 'STORE_CONTROLLER',
-    POS = 'POINT_OF_SALE',
-    AP = 'ACCESS_POINT',
-    PRINTER = 'PRINTER',
-    UPS = 'UNINTERRUPTIBLE_POWER_SUPPLY',
-    GW = 'GATEWAY',
+    SC = 'SC',
+    POS = 'POS',
+    AP = 'AP',
+    PRINTER = 'Printer',
+    UPS = 'UPS',
+    GW = 'GW',
     PDA = 'PDA',
-    EDC = 'ELECTRIC_DATA_CAPTURE',
-    CCTV = 'CLOSED_CIRCUIT_TELEVISION',
-    GOT = 'GOT_TABLET'
+    EDC = 'EDC',
+    CCTV = 'CCTV',
+    GOT = 'GOT'
 }
