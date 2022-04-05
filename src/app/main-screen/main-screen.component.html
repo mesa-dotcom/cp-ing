@@ -1,3 +1,8 @@
 <p-card header="Ping Form">
-    <input type="text" pInputText />
+    <h5>Store:</h5>
+    <input type="text" pInputText [(ngModel)]="store">
+    <br>
+    <ng-template pTemplate="footer">
+        <button pButton type="button" label="Ping" (click)="ping()"></button>
+    </ng-template>
 </p-card>
