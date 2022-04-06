@@ -10,7 +10,7 @@ export class IpService {
   constructor() { }
 
   public generateIPs(store_id: string, pickedDevices: Device[] = []): any {
-    const domain = this.createDomain(store_id)
+    const domain = this.generateDomain(store_id)
     pickedDevices.forEach((d) => {
       switch (d.type) {
         case DeviceType.GW:
@@ -51,7 +51,7 @@ export class IpService {
     return pickedDevices
   }
 
-  private createDomain(storeId: string) {
+  private generateDomain(storeId: string) {
     return `11${storeId[0]}.1${storeId.substring(1, 3)}.1${storeId.substring(3, 5)}`
   }
 }

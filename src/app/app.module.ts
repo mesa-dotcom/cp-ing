@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -10,6 +13,7 @@ import { GitIgnoreDirective } from './_shared/directives/git-ignore.directive';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 
 import PRIMENG_MODULE from './modules/prime-ng';
+import { ResultComponent } from './result/result.component';
 
 @NgModule({
   declarations: [
@@ -17,11 +21,15 @@ import PRIMENG_MODULE from './modules/prime-ng';
     FooterComponent,
     HeaderComponent,
     GitIgnoreDirective,
-    MainScreenComponent
+    MainScreenComponent,
+    ResultComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    NoopAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     ...PRIMENG_MODULE
   ],
