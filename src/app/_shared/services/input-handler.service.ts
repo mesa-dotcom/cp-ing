@@ -21,10 +21,10 @@ export class InputHandlerService {
   }
   private correctAlphaNumeric(value: string): boolean {
     const newValue = value.replace(/,/g, '').replace(/-/g, '');
-    return !!Number(newValue) && !newValue.includes('0');
+    return (!!Number(newValue) && !newValue.includes('0')) || value === '';
   }
   private arrayFromDash(value: string): number[] {
-    const nums = value.split('-');
+    const nums = value.split('-').filter((v) => v !== '');
     const sequences: number[] = [];
     if (nums.length === 2 && Number(nums[0]) < Number(nums[1])) {
       for (let i = +nums[0]; i <= +nums[1]; i++) {
@@ -32,6 +32,6 @@ export class InputHandlerService {
       }
       return sequences;
     }
-    throw new Error('Incorrect Input');
+    throw new Error(`${nums} is an incorrect Input`);
   }
 }

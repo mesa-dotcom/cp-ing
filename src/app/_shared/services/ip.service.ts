@@ -8,6 +8,11 @@ import { InputHandlerService } from './input-handler.service';
   providedIn: 'root',
 })
 export class IpService {
+  private readonly UniqueDevices: DeviceType[] = [
+    DeviceType.SC,
+    DeviceType.GOT,
+    DeviceType.GW,
+  ];
   constructor(private _inputHandlerService: InputHandlerService) {}
 
   public createDevices(
@@ -15,32 +20,22 @@ export class IpService {
     store: { [key: string]: any }
   ): Device[] {
     const devices: Device[] = [];
+    delete store['id']
     Object.keys(store).forEach((key) => {
-      if (
-        (key === DeviceType.SC ||
-          key === DeviceType.GOT ||
-          key === DeviceType.GW) &&
+      if (this.UniqueDevices.includes(key as DeviceType)) {
         store[key]
-      ) {
-        devices.push(this.generateIP(storeId, key as DeviceType));
-      } else if (key !== 'id' && store[key]) {
-        const numbers = this._inputHandlerService.createArrayFromInput(
-          store[key]
-        );
+          ? devices.push(this.generateIP(storeId, key as DeviceType))
+          : void 0;
+      } else {
+        const numbers = this._inputHandlerService.createArrayFromInput(store[key])
         numbers.forEach((n) => {
-          if (n <= LimitedNumberDevice[key]) {
-            devices.push(this.generateIP(storeId, key as DeviceType, n));
-          } else {
-            throw new Error(
-              `${DeviceFullName[key]}'s number is limited to ${LimitedNumberDevice[key]}.`
-            );
-          }
-        });
+          devices.push(this.generateIP(storeId, key as DeviceType, n));
+        })
       }
     });
     return devices;
   }
-  public generateIP(storeId: string, type: DeviceType, no?: number): Device {
+  private generateIP(storeId: string, type: DeviceType, no?: number): Device {
     const domain = this.generateDomain(storeId);
     const device: Device = {
       type: type,

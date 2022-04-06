@@ -3,7 +3,7 @@ export const LimitedNumberDevice: {[key: string]: number} = {
     pos: 8,
     ap: 8,
     printer: 8,
-    ups: 2,
+    ups: 3,
     gw: 1,
     pda: 8,
     edc: 13,

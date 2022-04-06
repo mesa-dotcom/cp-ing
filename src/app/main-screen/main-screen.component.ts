@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { DeviceFullName } from '../_shared/constants';
 import { DeviceType } from '../_shared/enums';
 import { Device } from '../_shared/models';
-import { InputHandlerService } from '../_shared/services/input-handler.service';
 import { IpService } from '../_shared/services/ip.service';
 
 @Component({
@@ -14,8 +13,12 @@ import { IpService } from '../_shared/services/ip.service';
 export class MainScreenComponent implements OnInit {
   public deviceFullName = DeviceFullName;
   public store: FormGroup;
-  constructor(private _ipService: IpService, private _builder: FormBuilder) {
-    this.store = this._builder.group({
+  upsOption: Array<{name: string, value: number}> = [
+    { name: '1', value: 1 },
+    { name: '2', value: 2 },
+  ];
+  constructor(private _ipService: IpService, private _fb: FormBuilder) {
+    this.store = this._fb.group({
       id: '',
       gw: false,
       sc: true,
@@ -32,6 +35,10 @@ export class MainScreenComponent implements OnInit {
 
   get storeId() {
     return this.store.controls['id'].value;
+  }
+
+  get ups() {
+    return this.store.controls['ups'].value;
   }
 
   ngOnInit(): void {}
