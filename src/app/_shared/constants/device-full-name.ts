@@ -1,12 +1,12 @@
 export const DeviceFullName: { [key: string]: string } = {
-    SC: 'Store Controller',
-    POS: 'Point of Sale',
-    AP: 'Access Point',
-    PRINTER: 'Printer',
-    UPS: 'Uninterruptible Power Supply',
-    GW: 'Gateway',
-    PDA: 'PDA',
-    EDC: 'Electric Data Capture',
-    CCTV: 'Closed Circuit Television',
-    GOT: 'GOT Tablet'
+    sc: 'Store Controller',
+    pos: 'Point of Sale',
+    ap: 'Access Point',
+    printer: 'Printer',
+    ups: 'Uninterruptible Power Supply',
+    gw: 'Gateway',
+    pda: 'PDA',
+    edc: 'Electric Data Capture',
+    cctv: 'Closed Circuit Television',
+    got: 'GOT Tablet'
 }
