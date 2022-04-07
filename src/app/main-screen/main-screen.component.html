@@ -11,111 +11,106 @@
     <h5>Devices:</h5>
     <div class="grid align-items-center">
       <div class="field-checkbox pr-6 pl-2">
-        <p-checkbox formControlName="gw" name="gw" [binary]="true">
+        <p-checkbox formControlName="gw" name="gw" id="gw" [binary]="true">
         </p-checkbox>
         <label for="gw" class="text-center">Gateway</label>
       </div>
       <div class="field-checkbox pr-6">
-        <p-checkbox formControlName="sc" name="sc" [binary]="true">
+        <p-checkbox formControlName="sc" name="sc" id="sc" [binary]="true">
         </p-checkbox>
         <label for="sc" class="text-center">SC</label>
       </div>
       <div class="field-checkbox">
-        <p-checkbox formControlName="got" name="got" [binary]="true">
+        <p-checkbox formControlName="got" name="got" id="got" [binary]="true">
         </p-checkbox>
-        <label for="sc" class="text-center">GOT Tablet</label>
+        <label for="got" class="text-center">GOT Tablet</label>
       </div>
       <div class="col-12 grid">
-        <div class="xl:col-1 lg:col-2 align-self-center">
+        <div class="{{ styleClass['label'] }}">
           <label for="pos">POS</label>
         </div>
-        <div class="xl:col-3 lg:col-4">
+        <div class="{{ styleClass['input'] }}">
           <input
             type="text"
+            [style]="{ width: '100%' }"
             pInputText
             formControlName="pos"
             name="pos"
             id="pos"
           />
         </div>
-        <div class="xl:col-1 lg:col-2 align-self-center">
+        <div class="{{ styleClass['label'] }}">
           <label for="ap">AP</label>
         </div>
-        <div class="xl:col-3 lg:col-4">
+        <div class="{{ styleClass['input'] }}">
           <input
             type="text"
+            [style]="{ width: '100%' }"
             pInputText
             formControlName="ap"
             name="ap"
             id="ap"
           />
         </div>
-        <div class="xl:col-1 lg:col-2 align-self-center">
-          <label for="pda">PDA/EBO</label>
+        <div class="{{ styleClass['label'] }}">
+          <label for="pda">PDA</label>
         </div>
-        <div class="xl:col-3 lg:col-4">
+        <div class="{{ styleClass['input'] }}">
           <input
             type="text"
+            [style]="{ width: '100%' }"
             pInputText
             formControlName="pda"
             name="pda"
             id="pda"
           />
         </div>
-        <div class="xl:col-1 lg:col-2 align-self-center">
-          <label for="pos">Printer</label>
+        <div class="{{ styleClass['label'] }}">
+          <label for="printer">Printer</label>
         </div>
-        <div class="xl:col-3 lg:col-4">
+        <div class="{{ styleClass['input'] }}">
           <input
             type="text"
+            [style]="{ width: '100%' }"
             pInputText
             formControlName="printer"
             name="printer"
             id="printer"
           />
         </div>
-        <div class="xl:col-1 lg:col-2 align-self-center">
-          <label for="printer">CCTV</label>
+        <div class="{{ styleClass['label'] }}">
+          <label for="cctv">CCTV</label>
         </div>
-        <div class="xl:col-3 lg:col-4">
-          <!-- <p-multiSelect [options]="cctvOption" formControlName="cctv" defaultLabel="Select a cctv" selectedItemsLabel="{0} items selected"></p-multiSelect> -->
+        <div class="{{ styleClass['input'] }}">
           <input
             type="text"
+            [style]="{ width: '100%' }"
             pInputText
             formControlName="cctv"
             name="cctv"
             id="cctv"
           />
         </div>
-        <div class="xl:col-1 lg:col-2 align-self-center">
+        <div class="{{ styleClass['label'] }}">
           <label for="ups">UPS</label>
         </div>
-        <div class="xl:col-3 lg:col-4">
-          <!-- <div class="pr-4" *ngFor="let data of upsOption; let i = index">
-            <p-checkbox
-              name="ups"
-              value="{{data.value}}"
-              (onChange)="onCheckboxChange($event)"
-              inputId="{{data.name}}"
-            ></p-checkbox>
-            <label for="{{data.name}}">
-              {{ data.name }}
-            </label>
-          </div> -->
-          <input
-          type="text"
-          pInputText
-          formControlName="ups"
-          name="edc"
-          id="edc"
-        />
-        </div>
-        <div class="xl:col-1 lg:col-2 align-self-center">
-          <label for="edc">EDC</label>
-        </div>
-        <div class="xl:col-3 lg:col-4">
+        <div class="{{ styleClass['input'] }}">
           <input
             type="text"
+            [style]="{ width: '100%' }"
+            pInputText
+            formControlName="ups"
+            name="ups"
+            id="ups"
+          />
+        </div>
+        <div class="{{ styleClass['label'] }}">
+          <label for="edc">EDC</label>
+        </div>
+        <div class="{{ styleClass['input'] }}">
+          <input
+            type="text"
+            [style]="{ width: '100%' }"
             pInputText
             formControlName="edc"
             name="edc"

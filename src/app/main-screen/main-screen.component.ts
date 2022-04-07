@@ -9,9 +9,13 @@ import { IpService } from '../_shared/services/ip.service';
   styleUrls: ['./main-screen.component.css'],
 })
 export class MainScreenComponent implements OnInit {
+  public styleClass: {[key: string]: string} = {
+    label: 'xl:col-1 lg:col-1 md:col-2 align-self-center',
+    input: 'xl:col-2 lg:col-3 md:col-4',
+  };
   public deviceFullName = DeviceFullName;
   public store: FormGroup;
-  upsOption: Array<{name: string, value: number}> = [
+  public upsOption: Array<{name: string, value: number}> = [
     { name: '1', value: 1 },
     { name: '2', value: 2 },
   ];
