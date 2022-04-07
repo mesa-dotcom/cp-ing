@@ -5,6 +5,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { FooterComponent } from './_shared/components/footer/footer.component';
@@ -22,7 +23,7 @@ import { ResultComponent } from './result/result.component';
     HeaderComponent,
     GitIgnoreDirective,
     MainScreenComponent,
-    ResultComponent
+    ResultComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +31,7 @@ import { ResultComponent } from './result/result.component';
     NoopAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     AppRoutingModule,
     ...PRIMENG_MODULE
   ],

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { DeviceFullName } from '../_shared/constants';
-import { DeviceType } from '../_shared/enums';
-import { Device } from '../_shared/models';
 import { IpService } from '../_shared/services/ip.service';
 
 @Component({
