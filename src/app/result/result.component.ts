@@ -14,6 +14,7 @@ export class ResultComponent implements OnInit {
       ip: '113.100.101.119',
     },
   ];
+  public objectImage = new Image()
   constructor(private _http: HttpClient) {}
 
   ngOnInit(): void {
