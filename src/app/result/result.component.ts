@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'comp-result',
   templateUrl: './result.component.html',
@@ -18,6 +19,9 @@ export class ResultComponent implements OnInit {
   constructor(private _http: HttpClient) {}
 
   ngOnInit(): void {
-
+    const response$: Observable<any> = this._http.get('/api/hello')
+    response$.subscribe((res) => {
+      console.log(res);
+    })
   }
 }

@@ -17,7 +17,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": ["@network-utils/tcp-ping"],
             "outputPath": "dist/cp-ing",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -68,6 +67,10 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "cp-ing:build",
+            "proxyConfig": "src/proxy.config.json"
+          },
           "configurations": {
             "production": {
               "browserTarget": "cp-ing:build:production"
