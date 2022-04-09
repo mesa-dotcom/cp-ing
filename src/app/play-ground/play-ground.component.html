@@ -1,25 +1,50 @@
 <p-card header="Test Pinging">
-  <div class="grid align-items-center">
-    <div class="col-1">
-      <h5>Testing IP:</h5>
+  <ng-template pTemplate="subtitle">
+    <div class="grid align-items-center">
+      <div class="col-1">
+        <h5>Testing IP:</h5>
+      </div>
+      <div class="col-3">
+        <input type="text" pInputText [(ngModel)]="ipTest" />
+      </div>
+      <div class="col-2">
+        <p-checkbox [(ngModel)]="isContinuous" [binary]="true"></p-checkbox>
+        <label class="pl-2">-t</label>
+      </div>
+      <div class="col-6 flex justify-content-end">
+        <button
+          pButton
+          type="button"
+          label="Clear"
+          class="p-button-secondary mx-2"
+          (click)="clear()"
+        ></button>
+        <button
+          *ngIf="!isPinging; else stopPinging"
+          pButton
+          type="button"
+          label="Ping"
+          (click)="start()"
+        ></button>
+        <ng-template #stopPinging>
+          <button
+            pButton
+            type="button"
+            label="Stop"
+            (click)="stop()"
+            class="p-button-danger"
+          ></button>
+        </ng-template>
+      </div>
     </div>
-    <div class="col-3">
-      <input type="text" pInputText [(ngModel)]="ipTest"/>
+  </ng-template>
+  <p-scrollPanel
+    [style]="{ height: '50vh', padding: '10px' }"
+    styleClass="custombar1"
+  >
+    <div class="search-result" *ngFor="let result of results">
+      {{ result }}
+      <hr />
     </div>
-    <div class="col-2">
-      <p-checkbox [(ngModel)]="isContinuous" [binary]="true"></p-checkbox>
-      <label class="pl-2">-t</label>
-    </div>
-    <div class="col-6 flex justify-content-end">
-      <button pButton type="button" label="Clear" class="p-button-secondary mx-2"></button>
-      <button *ngIf="!isPinging; else stopPinging" pButton type="button" label="Ping" (click)="start()"></button>
-      <ng-template #stopPinging>
-        <button pButton type="button" label="Stop" (click)="stop()" class="p-button-danger"></button>
-      </ng-template>
-    </div>
-  </div>
-  <div class="search-result" *ngFor="let result of results">
-    {{ result }}
-    <hr>
-  </div>
+  </p-scrollPanel>
 </p-card>

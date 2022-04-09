@@ -44,7 +44,6 @@ export class PlayGroundComponent implements OnInit {
   stop() {
     this.isPinging = false
     this.resultSubscription.unsubscribe()
-    this.clear()
   }
 
   clear() {
