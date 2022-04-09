@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DeviceFullName } from '../_shared/constants';
 import { IpService } from '../_shared/services/ip.service';
 
@@ -9,17 +10,21 @@ import { IpService } from '../_shared/services/ip.service';
   styleUrls: ['./main-screen.component.css'],
 })
 export class MainScreenComponent implements OnInit {
-  public styleClass: {[key: string]: string} = {
+  public styleClass: { [key: string]: string } = {
     label: 'xl:col-1 lg:col-1 md:col-2 align-self-center',
     input: 'xl:col-2 lg:col-3 md:col-4',
   };
   public deviceFullName = DeviceFullName;
   public store: FormGroup;
-  public upsOption: Array<{name: string, value: number}> = [
+  public upsOption: Array<{ name: string; value: number }> = [
     { name: '1', value: 1 },
     { name: '2', value: 2 },
   ];
-  constructor(private _ipService: IpService, private _fb: FormBuilder) {
+  constructor(
+    private _ipService: IpService,
+    private _fb: FormBuilder,
+    private _router: Router
+  ) {
     this.store = this._fb.group({
       id: '',
       gw: false,
@@ -47,9 +52,12 @@ export class MainScreenComponent implements OnInit {
 
   ping() {
     if (this.storeId.length === 4 || this.storeId.length === 5) {
-      console.table(
-        this._ipService.createDevices(this.storeId, this.store.value)
+      const devices = this._ipService.createDevices(
+        this.storeId,
+        this.store.value
       );
+      console.log(devices);
+      this._router.navigateByUrl('/result', {state: {data: devices}})
     }
   }
 }

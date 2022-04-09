@@ -1,6 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { DeviceFullName } from '../_shared/constants';
+import { PingService } from '../_shared/services/ping.service';
 @Component({
   selector: 'comp-result',
   templateUrl: './result.component.html',
@@ -8,6 +10,8 @@ import { Observable } from 'rxjs';
 })
 export class ResultComponent implements OnInit {
   public storeId = '30001';
+  public deviceFullName = DeviceFullName;
+  public ipsDevices: any[] = []
   public results: any[] = [
     {
       device: 'SC',
@@ -15,13 +19,13 @@ export class ResultComponent implements OnInit {
       ip: '113.100.101.119',
     },
   ];
-  public objectImage = new Image()
-  constructor(private _http: HttpClient) {}
+  constructor(private _router: Router, private _route: ActivatedRoute, private _pingService: PingService) {
+    this.ipsDevices = this._router.getCurrentNavigation()?.extras?.state?.['data'] || [];
+  }
 
   ngOnInit(): void {
-    const response$: Observable<any> = this._http.get('/api/hello')
-    response$.subscribe((res) => {
-      console.log(res);
-    })
+    if (this.ipsDevices.length === 0) {
+      this._router.navigateByUrl('/');
+    }
   }
 }
