@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainScreenComponent } from './main-screen/main-screen.component';
+import { PlayGroundComponent } from './play-ground/play-ground.component';
 import { ResultComponent } from './result/result.component';
 
 const routes: Routes = [
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'result',
     component: ResultComponent,
+  },
+  {
+    path: 'play-ground',
+    component: PlayGroundComponent
   }
 ];
 
