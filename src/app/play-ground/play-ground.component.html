@@ -1,17 +1,17 @@
 <p-card header="Test Pinging">
   <ng-template pTemplate="subtitle">
     <div class="grid align-items-center">
-      <div class="col-1">
+      <div class="md:col-2 xl:col-1">
         <h5>Testing IP:</h5>
       </div>
-      <div class="col-3">
-        <input [disabled]="isPinging" type="text" pInputText [(ngModel)]="ipTest" />
+      <div class="md:col-4 lg:col-3">
+        <input [style]="{ width: '100%' }" [disabled]="isPinging" type="text" pInputText [(ngModel)]="ipTest" />
       </div>
-      <div class="col-2">
+      <div class="md:col-2">
         <p-checkbox [disabled]="isPinging" [(ngModel)]="isContinuous" [binary]="true"></p-checkbox>
         <label class="pl-2">-t</label>
       </div>
-      <div class="col-6 flex justify-content-end">
+      <div class="md:col-4 lg:col-5 xl:col-6 flex justify-content-end">
         <button
           pButton
           type="button"
@@ -39,7 +39,7 @@
     </div>
   </ng-template>
   <p-scrollPanel
-    [style]="{ height: '55vh', padding: '10px' }"
+    [style]="{ height: '51vh', padding: '10px' }"
     styleClass="custom-bar"
   >
     <div class="search-result" *ngFor="let result of results">
