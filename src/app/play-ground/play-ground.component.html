@@ -5,10 +5,10 @@
         <h5>Testing IP:</h5>
       </div>
       <div class="col-3">
-        <input type="text" pInputText [(ngModel)]="ipTest" />
+        <input [disabled]="isPinging" type="text" pInputText [(ngModel)]="ipTest" />
       </div>
       <div class="col-2">
-        <p-checkbox [(ngModel)]="isContinuous" [binary]="true"></p-checkbox>
+        <p-checkbox [disabled]="isPinging" [(ngModel)]="isContinuous" [binary]="true"></p-checkbox>
         <label class="pl-2">-t</label>
       </div>
       <div class="col-6 flex justify-content-end">
@@ -39,8 +39,8 @@
     </div>
   </ng-template>
   <p-scrollPanel
-    [style]="{ height: '50vh', padding: '10px' }"
-    styleClass="custombar1"
+    [style]="{ height: '55vh', padding: '10px' }"
+    styleClass="custom-bar"
   >
     <div class="search-result" *ngFor="let result of results">
       {{ result }}

@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  interval,
-  mergeMap,
-  Subscription,
-} from 'rxjs';
+import { interval, mergeMap, Subscription, switchMap } from 'rxjs';
 import { PingService } from '../_shared/services/ping.service';
 
 @Component({
@@ -14,39 +10,45 @@ import { PingService } from '../_shared/services/ping.service';
 export class PlayGroundComponent implements OnInit {
   public isPinging: boolean = false;
   public isContinuous: boolean = false;
-  public ipTest: string = '';
-  public resultSubscription: Subscription = new Subscription()
-  public results: string[] = []
+  public ipTest: string = '127.0.0.1';
+  public resultSubscription: Subscription = new Subscription();
+  public results: string[] = [];
 
-  constructor(private _pingService: PingService) {
-  }
+  constructor(private _pingService: PingService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   start() {
-    if (this.ipTest !== '') {
-      this.isPinging = true
-      this.pingContinuously ? this.pingContinuously() : void 0
-    }
+    if (this.ipTest === '') return;
+    this.isPinging = true;
+    this.isContinuous ? this.pingContinuously() : this.pingNormally();
+  }
+
+  pingNormally() {
+    this.resultSubscription = this._pingService.ping(this.ipTest).subscribe({
+      next: (res: string) => {
+        this.results.push(res);
+      },
+      complete: () => {
+        this.isPinging = false;
+      },
+    });
   }
 
   pingContinuously() {
-    this.resultSubscription = interval(1000).pipe(
-      mergeMap(() => this._pingService.ping(this.ipTest)),
-    ).subscribe(
-      (result) => {
-        this.results.push(result)
-      }
-    )
+    this.resultSubscription = this._pingService
+      .pingContinuously(this.ipTest)
+      .subscribe((x: string) => {
+        this.results.push(x);
+      });
   }
 
   stop() {
-    this.isPinging = false
-    this.resultSubscription.unsubscribe()
+    this.isPinging = false;
+    this.resultSubscription.unsubscribe();
   }
 
   clear() {
-    this.results = []
+    this.results = [];
   }
 }
