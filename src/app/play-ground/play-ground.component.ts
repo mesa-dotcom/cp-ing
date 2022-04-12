@@ -12,7 +12,7 @@ export class PlayGroundComponent implements OnInit {
   public isContinuous: boolean = false;
   public ipTest: string = '127.0.0.1';
   public resultSubscription: Subscription = new Subscription();
-  public results: string[] = [];
+  public resultsDisplay: string[] = [];
 
   constructor(private _pingService: PingService) {}
 
@@ -26,8 +26,8 @@ export class PlayGroundComponent implements OnInit {
 
   pingNormally() {
     this.resultSubscription = this._pingService.ping(this.ipTest).subscribe({
-      next: (res: string) => {
-        this.results.push(res);
+      next: (res: any) => {
+        this.resultsDisplay.push(res.display);
       },
       complete: () => {
         this.isPinging = false;
@@ -38,8 +38,8 @@ export class PlayGroundComponent implements OnInit {
   pingContinuously() {
     this.resultSubscription = this._pingService
       .pingContinuously(this.ipTest)
-      .subscribe((x: string) => {
-        this.results.push(x);
+      .subscribe((x: any) => {
+        this.resultsDisplay.push(x.display);
       });
   }
 
@@ -49,6 +49,6 @@ export class PlayGroundComponent implements OnInit {
   }
 
   clear() {
-    this.results = [];
+    this.resultsDisplay = []
   }
 }
