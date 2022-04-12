@@ -7,25 +7,38 @@
       <span>
         {{ storeId }}
       </span>
-      <img class="w-2 float-right" src="/assets/images/giphy.gif" />
     </div>
   </div>
   <p-table [value]="results" responsiveLayout="scroll">
     <ng-template pTemplate="header">
-        <tr>
-            <th>Device</th>
-            <th>No</th>
-            <th>IP</th>
-            <th>Result</th>
-        </tr>
+      <tr>
+        <th>StoreId</th>
+        <th>Device</th>
+        <th>No</th>
+        <th>IP</th>
+        <th>Result</th>
+      </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-res>
-        <tr>
-            <td>{{deviceFullName[res.device]}}</td>
-            <td>{{res.no || '-'}}</td>
-            <td>{{res.ip}}</td>
-            <td>{{res.results[0]}}</td>
-        </tr>
+    <ng-template pTemplate="body" let-rslt>
+      <tr>
+        <td>B{{ rslt.storeId }}</td>
+        <td>{{ deviceAbbr[rslt.device] }}</td>
+        <td>{{ rslt.no || "-" }}</td>
+        <td>{{ rslt.ip }}</td>
+        <td>
+          <span *ngFor="let r of rslt.res">
+            <span *ngIf="r === 'success'" class="text-green-300">
+              <i class="pi pi-check"></i>
+            </span>
+            <span *ngIf="r === 'failed'" class="text-pink-500">
+              <i class="pi pi-times"></i>
+            </span>
+            <span *ngIf="r === 'pending'" class="text-teal-300">
+              <i class="pi pi-spin pi-spinner"></i>
+            </span>
+          </span>
+        </td>
+      </tr>
     </ng-template>
-</p-table>
+  </p-table>
 </p-card>

@@ -25,7 +25,7 @@ export class PlayGroundComponent implements OnInit {
   }
 
   pingNormally() {
-    this.resultSubscription = this._pingService.ping(this.ipTest).subscribe({
+    this.resultSubscription = this._pingService.pingRepeat(this.ipTest).subscribe({
       next: (res: any) => {
         this.resultsDisplay.push(res.display);
       },

@@ -49,7 +49,8 @@ export class MainScreenComponent {
   }
 
   clearInput() {
-    this.store.reset()
+    this.store.reset();
+    this.store.controls['id'].setValue('');
   }
 
   ping() {
@@ -58,6 +59,8 @@ export class MainScreenComponent {
       this.storeId,
       this.store.value
     );
-    this._router.navigateByUrl('/result', { state: { data: devices } });
+    this._router.navigateByUrl('/result', {
+      state: { storeId: this.storeId, data: devices },
+    });
   }
 }

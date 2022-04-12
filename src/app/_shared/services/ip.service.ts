@@ -24,7 +24,7 @@ export class IpService {
     Object.keys(store).forEach((key) => {
       if (this.UniqueDevices.includes(key as DeviceType)) {
         store[key]
-          ? devices.push(this.generateIP(storeId, key as DeviceType))
+          ? devices.push(this.generateIP(storeId, key as DeviceType, null))
           : void 0;
       } else if (store[key] !== '' && store[key] !== null) {
         const numbers = this._inputHandlerService.createArrayFromInput(
@@ -37,7 +37,7 @@ export class IpService {
     });
     return devices.sort(this.compareByType);
   }
-  private generateIP(storeId: string, type: DeviceType, no?: number): Device {
+  private generateIP(storeId: string, type: DeviceType, no?: number | null): Device {
     const domain = this.generateDomain(storeId);
     const device: Device = {
       type: type,

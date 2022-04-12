@@ -1,6 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { concatMap, interval, map, mergeMap, Observable, repeat, switchMap } from 'rxjs';
+import {
+  concatMap,
+  interval,
+  map,
+  Observable,
+  repeat,
+} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,20 +14,23 @@ import { concatMap, interval, map, mergeMap, Observable, repeat, switchMap } fro
 export class PingService {
   constructor(private _http: HttpClient) {}
 
-  formatOutput(output: string): string {
+  private formatOutput(output: string): string {
     return output.split('Ping statistics')[0];
   }
 
-  ping(ip: string, times: number = 4): Observable<any> {
-    return this._http.post('api/ping', { ip }).pipe(
-      map((x: any) => {
-        return { all: x, display: this.formatOutput(x.output) };
-      }),
-      repeat(times)
-    );
+  public ping(ip: string) {
+    return this._http
+      .post('api/ping', { ip })
+      .pipe(
+        map((x: any) => ({ all: x, display: this.formatOutput(x.output) }))
+      );
   }
 
-  pingContinuously(ip: string): Observable<any> {
-    return interval(1000).pipe(concatMap(() => this.ping(ip, 1)));
+  public pingRepeat(ip: string, times: number = 4): Observable<any> {
+    return this.ping(ip).pipe(repeat(times));
+  }
+
+  public pingContinuously(ip: string): Observable<any> {
+    return interval(1000).pipe(concatMap(() => this.ping(ip)));
   }
 }
