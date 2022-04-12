@@ -4,8 +4,10 @@
       <h5>Store:</h5>
     </div>
     <div class="col-10">
-      {{ storeId }}
-      <img style="width: 100px;" src="/assets/images/giphy.gif" />
+      <span>
+        {{ storeId }}
+      </span>
+      <img class="w-2 float-right" src="/assets/images/giphy.gif" />
     </div>
   </div>
   <p-table [value]="results" responsiveLayout="scroll">
@@ -19,7 +21,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-res>
         <tr>
-            <td>{{res.device}}</td>
+            <td>{{deviceFullName[res.device]}}</td>
             <td>{{res.no || '-'}}</td>
             <td>{{res.ip}}</td>
             <td>{{res.results[0]}}</td>

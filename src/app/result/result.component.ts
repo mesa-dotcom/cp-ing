@@ -11,27 +11,28 @@ import { PingService } from '../_shared/services/ping.service';
 export class ResultComponent implements OnInit {
   public storeId = '30001';
   public deviceFullName = DeviceFullName;
-  public ipsDevices: Device[] = []
+  public ipsDevices: Device[] = [];
   public results: any[] = [];
-  constructor(private _router: Router, private _route: ActivatedRoute, private _pingService: PingService) {
-    this.ipsDevices = this._router.getCurrentNavigation()?.extras?.state?.['data'] || [];
+  constructor(
+    private _router: Router,
+    private _route: ActivatedRoute,
+    private _pingService: PingService
+  ) {
+    this.ipsDevices =
+      this._router.getCurrentNavigation()?.extras?.state?.['data'] || [];
+    this.ipsDevices.forEach((d) => {
+      this.results.push({
+        device: d.type,
+        ip: d.ip,
+        no: d.no,
+        results: [],
+      });
+    });
   }
 
   ngOnInit(): void {
     if (this.ipsDevices.length === 0) {
       this._router.navigateByUrl('/');
     }
-    this.ipsDevices.forEach((device) => {
-      this._pingService.ping(device.ip, 1).subscribe((res) => {
-        this.results.push(
-          {
-            device: device.type,
-            ip: device.ip,
-            no: device.No,
-            results: [res]
-          }
-        )
-      });
-    })
   }
 }

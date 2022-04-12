@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { DevicePriority } from '../constants';
 import { DeviceType } from '../enums';
 import { Device } from '../models';
 import { InputHandlerService } from './input-handler.service';
@@ -19,17 +20,19 @@ export class IpService {
     store: { [key: string]: any }
   ): Device[] {
     const devices: Device[] = [];
-    delete store['id']
+    delete store['id'];
     Object.keys(store).forEach((key) => {
       if (this.UniqueDevices.includes(key as DeviceType)) {
         store[key]
           ? devices.push(this.generateIP(storeId, key as DeviceType))
           : void 0;
-      } else if (store[key] !== '') {
-        const numbers = this._inputHandlerService.createArrayFromInput(store[key])
+      } else if (store[key] !== '' && store[key] !== null) {
+        const numbers = this._inputHandlerService.createArrayFromInput(
+          store[key]
+        );
         numbers.forEach((n) => {
           devices.push(this.generateIP(storeId, key as DeviceType, n));
-        })
+        });
       }
     });
     return devices.sort(this.compareByType);
@@ -38,7 +41,7 @@ export class IpService {
     const domain = this.generateDomain(storeId);
     const device: Device = {
       type: type,
-      No: no,
+      no: no,
       ip: '',
     };
     switch (type) {
@@ -86,11 +89,11 @@ export class IpService {
     )}.1${fullStoreId.substring(3, 5)}`;
   }
 
-  private compareByType(a: Device, b: Device) {
-    if ( a.type < b.type ){
+  public compareByType(a: Device, b: Device) {
+    if (DevicePriority[a.type] < DevicePriority[b.type]) {
       return -1;
     }
-    if ( a.type > b.type ){
+    if (DevicePriority[a.type] > DevicePriority[b.type]) {
       return 1;
     }
     return 0;

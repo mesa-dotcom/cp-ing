@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DeviceFullName } from '../_shared/constants';
@@ -9,7 +9,7 @@ import { IpService } from '../_shared/services/ip.service';
   templateUrl: './main-screen.component.html',
   styleUrls: ['./main-screen.component.css'],
 })
-export class MainScreenComponent implements OnInit {
+export class MainScreenComponent {
   public styleClass: { [key: string]: string } = {
     label: 'xl:col-1 lg:col-1 md:col-2 align-self-center',
     input: 'xl:col-2 lg:col-3 md:col-4',
@@ -48,7 +48,9 @@ export class MainScreenComponent implements OnInit {
     return this.store.controls['ups'].value;
   }
 
-  ngOnInit(): void {}
+  clearInput() {
+    this.store.reset()
+  }
 
   ping() {
     if (this.storeId.length !== 4 && this.storeId.length !== 5) return;
