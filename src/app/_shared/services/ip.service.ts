@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { DeviceFullName, LimitedNumberDevice } from '../constants';
 import { DeviceType } from '../enums';
 import { Device } from '../models';
 import { InputHandlerService } from './input-handler.service';
@@ -26,14 +25,14 @@ export class IpService {
         store[key]
           ? devices.push(this.generateIP(storeId, key as DeviceType))
           : void 0;
-      } else {
+      } else if (store[key] !== '') {
         const numbers = this._inputHandlerService.createArrayFromInput(store[key])
         numbers.forEach((n) => {
           devices.push(this.generateIP(storeId, key as DeviceType, n));
         })
       }
     });
-    return devices;
+    return devices.sort(this.compareByType);
   }
   private generateIP(storeId: string, type: DeviceType, no?: number): Device {
     const domain = this.generateDomain(storeId);
@@ -85,5 +84,15 @@ export class IpService {
       1,
       3
     )}.1${fullStoreId.substring(3, 5)}`;
+  }
+
+  private compareByType(a: Device, b: Device) {
+    if ( a.type < b.type ){
+      return -1;
+    }
+    if ( a.type > b.type ){
+      return 1;
+    }
+    return 0;
   }
 }

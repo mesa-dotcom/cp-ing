@@ -51,13 +51,11 @@ export class MainScreenComponent implements OnInit {
   ngOnInit(): void {}
 
   ping() {
-    if (this.storeId.length === 4 || this.storeId.length === 5) {
-      const devices = this._ipService.createDevices(
-        this.storeId,
-        this.store.value
-      );
-      console.log(devices);
-      this._router.navigateByUrl('/result', {state: {data: devices}})
-    }
+    if (this.storeId.length !== 4 && this.storeId.length !== 5) return;
+    const devices = this._ipService.createDevices(
+      this.storeId,
+      this.store.value
+    );
+    this._router.navigateByUrl('/result', { state: { data: devices } });
   }
 }
