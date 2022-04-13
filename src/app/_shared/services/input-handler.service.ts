@@ -4,9 +4,16 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class InputHandlerService {
+
   constructor() {}
-  public createArrayFromInput(value: string): number[] {
-    if (!this.correctAlphaNumeric(value))
+  public createArrayOfStore(value: string): string[] {
+    if (!this.correctStoreAlphaNumeric(value))
+      throw new Error(`${value} Incorrect Store Input`);
+    return value.split(',')
+  }
+
+  public createArrayOfDevices(value: string): number[] {
+    if (!this.correctDeviceAlphaNumeric(value))
       throw new Error(`${value} Incorrect Input`);
     let output: number[] = [];
     value.split(',').forEach((v) => {
@@ -18,10 +25,17 @@ export class InputHandlerService {
     });
     return [...new Set(output)];
   }
-  private correctAlphaNumeric(value: string): boolean {
+
+  private correctStoreAlphaNumeric(value: string) : boolean {
+    const newValue = value.replace(/,/g, '')
+    return !!Number(newValue) && value === '';
+  }
+
+  private correctDeviceAlphaNumeric(value: string): boolean {
     const newValue = value.replace(/,/g, '').replace(/-/g, '');
     return (!!Number(newValue) && !newValue.includes('0')) || value === '';
   }
+
   private arrayFromDash(value: string): number[] {
     const nums = value.split('-').filter((v) => v !== '');
     const sequences: number[] = [];

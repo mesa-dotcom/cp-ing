@@ -15,30 +15,39 @@ export class IpService {
   ];
   constructor(private _inputHandlerService: InputHandlerService) {}
 
-  public createDevices(
+  public createDevicesOfStores(storeIds: string, devicesOfStore: { [key: string]: any }) {
+    delete devicesOfStore['id'];
+    const stores = this._inputHandlerService.createArrayOfStore(storeIds);
+    const devicesOfStores: {[key: string]: Device[]} = {}
+    stores.forEach((store) => {
+      devicesOfStores[store] = this.createDevices(store, devicesOfStore);
+    })
+    return devicesOfStores;
+  }
+
+  private createDevices(
     storeId: string,
-    store: { [key: string]: any }
+    devicesOfStore: { [key: string]: any }
   ): Device[] {
+    const domain = this.generateDomain(storeId);
     const devices: Device[] = [];
-    delete store['id'];
-    Object.keys(store).forEach((key) => {
+    Object.keys(devicesOfStore).forEach((key) => {
       if (this.UniqueDevices.includes(key as DeviceType)) {
-        store[key]
-          ? devices.push(this.generateIP(storeId, key as DeviceType, null))
+        devicesOfStore[key]
+          ? devices.push(this.generateIP(domain, key as DeviceType, null))
           : void 0;
-      } else if (store[key] !== '' && store[key] !== null) {
-        const numbers = this._inputHandlerService.createArrayFromInput(
-          store[key]
+      } else if (devicesOfStore[key] !== '' && devicesOfStore[key] !== null) {
+        const numbers = this._inputHandlerService.createArrayOfDevices(
+          devicesOfStore[key]
         );
         numbers.forEach((n) => {
-          devices.push(this.generateIP(storeId, key as DeviceType, n));
+          devices.push(this.generateIP(domain, key as DeviceType, n));
         });
       }
     });
     return devices.sort(this.compareByType);
   }
-  private generateIP(storeId: string, type: DeviceType, no?: number | null): Device {
-    const domain = this.generateDomain(storeId);
+  private generateIP(domain: string, type: DeviceType, no?: number | null): Device {
     const device: Device = {
       type: type,
       no: no,
@@ -81,7 +90,7 @@ export class IpService {
     }
     return device;
   }
-  private generateDomain(storeId: string) {
+  private generateDomain(storeId: string): string {
     const fullStoreId = storeId.length === 4 ? '7' + storeId : storeId;
     return `11${fullStoreId[0]}.1${fullStoreId.substring(
       1,

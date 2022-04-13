@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DeviceFullName } from '../_shared/constants';
+import { InputHandlerService } from '../_shared/services/input-handler.service';
 import { IpService } from '../_shared/services/ip.service';
 
 @Component({
@@ -23,7 +24,8 @@ export class MainScreenComponent {
   constructor(
     private _ipService: IpService,
     private _fb: FormBuilder,
-    private _router: Router
+    private _router: Router,
+    private _inputHandlerService: InputHandlerService
   ) {
     this.store = this._fb.group({
       id: '',
@@ -55,7 +57,7 @@ export class MainScreenComponent {
 
   ping() {
     if (this.storeId.length !== 4 && this.storeId.length !== 5) return;
-    const devices = this._ipService.createDevices(
+    const devices = this._ipService.createDevicesOfStores(
       this.storeId,
       this.store.value
     );
