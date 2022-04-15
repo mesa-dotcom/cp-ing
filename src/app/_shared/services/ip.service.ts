@@ -15,14 +15,22 @@ export class IpService {
   ];
   constructor(private _inputHandlerService: InputHandlerService) {}
 
-  public createDevicesOfStores(storeIds: string, devicesOfStore: { [key: string]: any }) {
+  public createDevicesOfStores<T>(
+    storeIds: string,
+    devicesOfStore: { [key: string]: any }
+  ) {
     delete devicesOfStore['id'];
-    const stores = this._inputHandlerService.createArrayOfStore(storeIds);
-    const devicesOfStores: {[key: string]: Device[]} = {}
+    const stores = [
+      ...new Set(this._inputHandlerService.createArrayOfStore(storeIds)),
+    ];
+    const devicesOfStores: { storeId: string; devices: Device[] }[] = [];
     stores.forEach((store) => {
-      devicesOfStores[store] = this.createDevices(store, devicesOfStore);
-    })
-    return devicesOfStores;
+      devicesOfStores.push({
+        storeId: store,
+        devices: this.createDevices(store, devicesOfStore),
+      });
+    });
+    return devicesOfStores.sort(this.compareStoreById);
   }
 
   private createDevices(
@@ -45,13 +53,18 @@ export class IpService {
         });
       }
     });
-    return devices.sort(this.compareByType);
+    return devices.sort(this.compareDeviceByType);
   }
-  private generateIP(domain: string, type: DeviceType, no?: number | null): Device {
+  private generateIP(
+    domain: string,
+    type: DeviceType,
+    no?: number | null
+  ): Device {
     const device: Device = {
       type: type,
       no: no,
       ip: '',
+      status: ['pending', 'pending', 'pending', 'pending'],
     };
     switch (type) {
       case DeviceType.GW:
@@ -98,7 +111,7 @@ export class IpService {
     )}.1${fullStoreId.substring(3, 5)}`;
   }
 
-  public compareByType(a: Device, b: Device) {
+  private compareDeviceByType(a: Device, b: Device) {
     if (DevicePriority[a.type] < DevicePriority[b.type]) {
       return -1;
     }
@@ -106,5 +119,9 @@ export class IpService {
       return 1;
     }
     return 0;
+  }
+
+  private compareStoreById(a: any, b: any) {
+    return Number(a.storeId) - Number(b.storeId);
   }
 }

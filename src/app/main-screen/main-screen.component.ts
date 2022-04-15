@@ -25,7 +25,6 @@ export class MainScreenComponent {
     private _ipService: IpService,
     private _fb: FormBuilder,
     private _router: Router,
-    private _inputHandlerService: InputHandlerService
   ) {
     this.store = this._fb.group({
       id: '',
@@ -56,13 +55,16 @@ export class MainScreenComponent {
   }
 
   ping() {
-    if (this.storeId.length !== 4 && this.storeId.length !== 5) return;
-    const devices = this._ipService.createDevicesOfStores(
-      this.storeId,
-      this.store.value
-    );
-    this._router.navigateByUrl('/result', {
-      state: { storeId: this.storeId, data: devices },
-    });
+    try {
+      const devices = this._ipService.createDevicesOfStores(
+        this.storeId,
+        this.store.value
+      );
+      this._router.navigateByUrl('/result', {
+        state: { storeId: this.storeId, data: devices },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

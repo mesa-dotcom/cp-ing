@@ -6,6 +6,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { TableModule } from 'primeng/table';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { ToolbarModule } from 'primeng/toolbar';
+import { TabViewModule } from 'primeng/tabview';
 
 const PRIMENG_MODULE = [
   CardModule,
@@ -16,6 +17,7 @@ const PRIMENG_MODULE = [
   TableModule,
   ScrollPanelModule,
   ToolbarModule,
+  TabViewModule
 ];
 
 export default PRIMENG_MODULE;

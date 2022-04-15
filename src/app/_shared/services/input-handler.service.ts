@@ -4,12 +4,15 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class InputHandlerService {
-
   constructor() {}
   public createArrayOfStore(value: string): string[] {
-    if (!this.correctStoreAlphaNumeric(value))
+    const stores = value.split(',');
+    if (
+      !this.correctStoreAlphaNumeric(value) ||
+      stores.some((s) => s.length !== 4 && s.length !== 5)
+    )
       throw new Error(`${value} Incorrect Store Input`);
-    return value.split(',')
+    return stores;
   }
 
   public createArrayOfDevices(value: string): number[] {
@@ -26,9 +29,9 @@ export class InputHandlerService {
     return [...new Set(output)];
   }
 
-  private correctStoreAlphaNumeric(value: string) : boolean {
-    const newValue = value.replace(/,/g, '')
-    return !!Number(newValue) && value === '';
+  private correctStoreAlphaNumeric(value: string): boolean {
+    const newValue = value.replace(/,/g, '');
+    return !!Number(newValue);
   }
 
   private correctDeviceAlphaNumeric(value: string): boolean {
