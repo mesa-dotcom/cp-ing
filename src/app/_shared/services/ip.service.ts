@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DevicePriority } from '../constants';
+import { DevicePriority, ErrorMsg, LimitedNumberDevice } from '../constants';
 import { DeviceType } from '../enums';
 import { Device } from '../models';
 import { InputHandlerService } from './input-handler.service';
@@ -46,8 +46,14 @@ export class IpService {
           : void 0;
       } else if (devicesOfStore[key] !== '' && devicesOfStore[key] !== null) {
         const numbers = this._inputHandlerService.createArrayOfDevices(
-          devicesOfStore[key]
+          devicesOfStore[key],
+          key as DeviceType
         );
+        if (numbers.some(n => n > LimitedNumberDevice[key as DeviceType])) {
+          throw new Error(
+            ErrorMsg.limitedNumber(key as DeviceType)
+          );
+        }
         numbers.forEach((n) => {
           devices.push(this.generateIP(domain, key as DeviceType, n));
         });

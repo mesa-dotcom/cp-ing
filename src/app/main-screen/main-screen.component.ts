@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { DeviceFullName } from '../_shared/constants';
 import { MessageService } from 'primeng/api';
 import { IpService } from '../_shared/services/ip.service';
+import { ErrorMsg } from '../_shared/constants/error-message';
 
 @Component({
   selector: 'comp-main-screen',
@@ -58,19 +59,22 @@ export class MainScreenComponent {
 
   toResult() {
     if (!this.store.valid) {
-      this.addToastError('Store Id is required.');
-      return
-    };
+      this.addToastError(ErrorMsg.required('Store ID'));
+      return;
+    }
     try {
       const devices = this._ipService.createDevicesOfStores(
         this.storeId,
         this.store.value
       );
+      if (devices[0].devices.length === 0) {
+        this.addToastError(ErrorMsg.atLeastOne());
+        return;
+      }
       this._router.navigateByUrl('/result', {
         state: { storeId: this.storeId, data: devices },
       });
     } catch (error: any) {
-      console.log(error);
       this.addToastError(error.message);
     }
   }

@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { ErrorMsg } from '../constants';
+import { DeviceType } from '../enums';
 
 @Injectable({
   providedIn: 'root',
@@ -8,16 +10,18 @@ export class InputHandlerService {
   public createArrayOfStore(value: string): string[] {
     const stores = value.split(',');
     if (
-      !this.correctStoreAlphaNumeric(value) ||
-      stores.some((s) => s.length !== 4 && s.length !== 5)
-    )
-      throw new Error(`${value} is an incorrect Store input.`);
+      !this.correctStoreAlphaNumeric(value)
+    ){
+      throw new Error(ErrorMsg.incorrectStoreInput(value));
+    } else if (stores.some((s) => s.length !== 4 && s.length !== 5)) {
+      throw new Error(ErrorMsg.incorrectStoreId());
+    }
     return stores;
   }
 
-  public createArrayOfDevices(value: string): number[] {
+  public createArrayOfDevices(value: string, deviceType: DeviceType): number[] {
     if (!this.correctDeviceAlphaNumeric(value))
-      throw new Error(`${value} is an incorrect Device input.`);
+      throw new Error(ErrorMsg.incorrectDeviceInput(value, deviceType));
     let output: number[] = [];
     value.split(',').forEach((v) => {
       if (v.includes('-')) {
@@ -43,7 +47,7 @@ export class InputHandlerService {
     const nums = value.split('-').filter((v) => v !== '');
     const sequences: number[] = [];
     if (nums.length !== 2 || Number(nums[0]) > Number(nums[1]))
-      throw new Error(`${nums} is an incorrect store Input`);
+      throw new Error(`${value} is an incorrect input.`);
 
     for (let i = +nums[0]; i <= +nums[1]; i++) {
       sequences.push(i);
