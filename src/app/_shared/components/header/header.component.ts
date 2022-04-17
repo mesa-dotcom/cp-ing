@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  webTitle: string = 'CP-ing'
   constructor() { }
 
   ngOnInit(): void {

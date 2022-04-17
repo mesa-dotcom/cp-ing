@@ -1,5 +1,23 @@
-<p-toolbar>
-  <div class="p-toolbar-group-left">CP-ing</div>
-
-  <div class="p-toolbar-group-right">Button</div>
-</p-toolbar>
+<div class="w-full h-4rem grid align-items-center panel-bar">
+  <div class="col-6 logo" [routerLink]="['/']">{{ webTitle }}</div>
+  <div class="col-6 flex flex-row-reverse">
+    <p-button
+      styleClass="mx-1 bg-indigo-300"
+      icon="pi pi-cog"
+      pTooltip="Setting"
+    ></p-button>
+    <p-button
+      styleClass="mx-1 bg-cyan-300"
+      icon="pi pi-play"
+      pTooltip="Playground"
+      tooltipPosition="bottom"
+      [routerLink]="['/play-ground']"
+    ></p-button>
+    <p-button
+      styleClass="mx-1 bg-bluegray-300"
+      icon="pi pi-wifi"
+      pTooltip="Store Pinging"
+      [routerLink]="['/']"
+    ></p-button>
+  </div>
+</div>

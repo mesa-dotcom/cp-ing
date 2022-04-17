@@ -5,8 +5,8 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { TableModule } from 'primeng/table';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
-import { ToolbarModule } from 'primeng/toolbar';
 import { TabViewModule } from 'primeng/tabview';
+import { TooltipModule } from 'primeng/tooltip';
 
 const PRIMENG_MODULE = [
   CardModule,
@@ -16,8 +16,8 @@ const PRIMENG_MODULE = [
   MultiSelectModule,
   TableModule,
   ScrollPanelModule,
-  ToolbarModule,
-  TabViewModule
+  TabViewModule,
+  TooltipModule,
 ];
 
 export default PRIMENG_MODULE;
