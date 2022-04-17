@@ -9,7 +9,7 @@
               <th>No</th>
               <th>IP</th>
               <th>Result</th>
-              <th>Action</th>
+              <th>Re-Ping</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-d>
@@ -31,7 +31,15 @@
                 </span>
               </td>
               <td>
-                Reping
+                <button
+                  pButton
+                  pRipple
+                  type="button"
+                  icon="pi pi-undo"
+                  class="p-button-rounded p-button-help"
+                  [disabled]="getDisabledRePing(d)"
+                  (click)="rePing(d)"
+                ></button>
               </td>
             </tr>
           </ng-template>
