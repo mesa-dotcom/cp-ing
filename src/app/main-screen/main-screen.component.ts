@@ -57,7 +57,10 @@ export class MainScreenComponent {
   }
 
   toResult() {
-    if (!this.store.valid) return;
+    if (!this.store.valid) {
+      this.addToastError('Store Id is required.');
+      return
+    };
     try {
       const devices = this._ipService.createDevicesOfStores(
         this.storeId,

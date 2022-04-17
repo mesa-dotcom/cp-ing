@@ -8,6 +8,8 @@ import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { TabViewModule } from 'primeng/tabview';
 import { TooltipModule } from 'primeng/tooltip';
 import { ToastModule } from 'primeng/toast';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
 
 const PRIMENG_MODULE = [
   CardModule,
@@ -19,7 +21,9 @@ const PRIMENG_MODULE = [
   ScrollPanelModule,
   TabViewModule,
   TooltipModule,
-  ToastModule
+  ToastModule,
+  MessagesModule,
+  MessageModule,
 ];
 
 export default PRIMENG_MODULE;
