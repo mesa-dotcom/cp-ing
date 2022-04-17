@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DeviceFullName } from '../_shared/constants';
-import { InputHandlerService } from '../_shared/services/input-handler.service';
+import { MessageService } from 'primeng/api';
 import { IpService } from '../_shared/services/ip.service';
 
 @Component({
   selector: 'comp-main-screen',
   templateUrl: './main-screen.component.html',
   styleUrls: ['./main-screen.component.css'],
+  providers: [MessageService],
 })
 export class MainScreenComponent {
   public styleClass: { [key: string]: string } = {
@@ -25,9 +26,10 @@ export class MainScreenComponent {
     private _ipService: IpService,
     private _fb: FormBuilder,
     private _router: Router,
+    private _messageService: MessageService
   ) {
     this.store = this._fb.group({
-      id: '',
+      id: ['', Validators.required],
       gw: false,
       sc: true,
       got: false,
@@ -54,7 +56,8 @@ export class MainScreenComponent {
     this.store.controls['id'].setValue('');
   }
 
-  ping() {
+  toResult() {
+    if (!this.store.valid) return;
     try {
       const devices = this._ipService.createDevicesOfStores(
         this.storeId,
@@ -63,8 +66,21 @@ export class MainScreenComponent {
       this._router.navigateByUrl('/result', {
         state: { storeId: this.storeId, data: devices },
       });
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      this.addToastError(error.message);
     }
+  }
+
+  addToastError(error: string) {
+    this._messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: error,
+    });
+  }
+
+  clear() {
+    this._messageService.clear();
   }
 }

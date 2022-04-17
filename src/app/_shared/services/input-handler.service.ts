@@ -11,13 +11,13 @@ export class InputHandlerService {
       !this.correctStoreAlphaNumeric(value) ||
       stores.some((s) => s.length !== 4 && s.length !== 5)
     )
-      throw new Error(`${value} Incorrect Store Input`);
+      throw new Error(`${value} is an incorrect Store input.`);
     return stores;
   }
 
   public createArrayOfDevices(value: string): number[] {
     if (!this.correctDeviceAlphaNumeric(value))
-      throw new Error(`${value} Incorrect Input`);
+      throw new Error(`${value} is an incorrect Device input.`);
     let output: number[] = [];
     value.split(',').forEach((v) => {
       if (v.includes('-')) {
@@ -43,7 +43,7 @@ export class InputHandlerService {
     const nums = value.split('-').filter((v) => v !== '');
     const sequences: number[] = [];
     if (nums.length !== 2 || Number(nums[0]) > Number(nums[1]))
-      throw new Error(`${nums} is an incorrect Input`);
+      throw new Error(`${nums} is an incorrect store Input`);
 
     for (let i = +nums[0]; i <= +nums[1]; i++) {
       sequences.push(i);
