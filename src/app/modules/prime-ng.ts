@@ -10,6 +10,9 @@ import { TooltipModule } from 'primeng/tooltip';
 import { ToastModule } from 'primeng/toast';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { DialogModule } from 'primeng/dialog'
 
 const PRIMENG_MODULE = [
   CardModule,
@@ -24,6 +27,7 @@ const PRIMENG_MODULE = [
   ToastModule,
   MessagesModule,
   MessageModule,
+  DialogModule
 ];
 
 export default PRIMENG_MODULE;

@@ -16,6 +16,7 @@ import { MainScreenComponent } from './main-screen/main-screen.component';
 import PRIMENG_MODULE from './modules/prime-ng';
 import { ResultComponent } from './result/result.component';
 import { PlayGroundComponent } from './play-ground/play-ground.component';
+import { SettingComponent } from './_shared/components/setting/setting.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { PlayGroundComponent } from './play-ground/play-ground.component';
     MainScreenComponent,
     ResultComponent,
     PlayGroundComponent,
+    SettingComponent,
   ],
   imports: [
     BrowserModule,

@@ -2,19 +2,20 @@
   <div class="col-6 logo" [routerLink]="['/']">{{ webTitle }}</div>
   <div class="col-6 flex flex-row-reverse">
     <p-button
-      styleClass="mx-1 bg-indigo-300"
+      styleClass="mx-1 bg-indigo-500"
       icon="pi pi-cog"
       pTooltip="Setting"
+      (onClick)="openSetting()"
     ></p-button>
     <p-button
-      styleClass="mx-1 bg-cyan-300"
+      styleClass="mx-1 bg-cyan-500"
       icon="pi pi-play"
       pTooltip="Playground"
       tooltipPosition="bottom"
       [routerLink]="['/play-ground']"
     ></p-button>
     <p-button
-      styleClass="mx-1 bg-bluegray-300"
+      styleClass="mx-1 bg-bluegray-500"
       icon="pi pi-wifi"
       pTooltip="Store Pinging"
       tooltipPosition="left"
@@ -22,3 +23,9 @@
     ></p-button>
   </div>
 </div>
+<p-dialog [modal]="true" [(visible)]="displayModal" header="SETTINGS" [draggable]="false">
+  <comp-setting></comp-setting>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="displayModal=false" label="Ok" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>
