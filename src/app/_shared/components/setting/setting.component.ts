@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, Input, OnInit, Output } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 import { DeviceABBR, DeviceFullName, LimitedNumberDevice, UniqueDevices } from '../../constants';
 import { SettingService } from '../../services/setting.service';
 
@@ -7,7 +8,7 @@ import { SettingService } from '../../services/setting.service';
   templateUrl: './setting.component.html',
   styleUrls: ['./setting.component.css']
 })
-export class SettingComponent implements OnInit {
+export class SettingComponent implements OnInit  {
   setting: any = {}
   keys: string[] = []
   deviceFullName = DeviceFullName
@@ -17,7 +18,6 @@ export class SettingComponent implements OnInit {
   constructor(private _settingService: SettingService) {
     this.setting = this._settingService.getSetting()
     this.keys = Object.keys(this.setting)
-    console.log(this.setting[this.keys[0]].show);
   }
 
   ngOnInit(): void {

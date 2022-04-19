@@ -48,6 +48,10 @@ export class ResultComponent implements OnInit {
     this._pingService.pingDevice(d);
   }
 
+  rePingAll() {
+
+  }
+
   // pingAll() {
   //   this.results.forEach((r) => {
   //     this._pingService.ping(r.ip).subscribe({

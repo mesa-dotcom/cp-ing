@@ -47,4 +47,15 @@
       </p-tabPanel>
     </ng-container>
   </p-tabView>
+  <ng-template pTemplate="footer">
+    <button
+    pButton
+    pRipple
+    type="button"
+    label="Re Ping All"
+    icon="pi pi-undo"
+    class="p-button-rounded p-button-help"
+    (click)="rePingAll()"
+  ></button>
+  </ng-template>
 </p-card>

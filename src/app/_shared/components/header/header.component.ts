@@ -21,4 +21,8 @@ export class HeaderComponent implements OnInit {
   openSetting() {
     this.displayModal = true;
   }
+
+  settingChanged(e: any) {
+    console.log(e);
+  }
 }
