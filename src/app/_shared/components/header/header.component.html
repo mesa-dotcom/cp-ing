@@ -15,7 +15,7 @@
       [routerLink]="['/play-ground']"
     ></p-button>
     <p-button
-      styleClass="mx-1 bg-bluegray-600"
+      styleClass="mx-1 bg-pink-600"
       icon="pi pi-wifi"
       pTooltip="Store Pinging"
       tooltipPosition="left"
@@ -23,9 +23,21 @@
     ></p-button>
   </div>
 </div>
-<p-dialog [modal]="true" [(visible)]="displayModal" header="SETTINGS" [draggable]="false">
-  <comp-setting></comp-setting>
+<p-dialog
+  [modal]="true"
+  [(visible)]="displayModal"
+  header="SETTINGS"
+  [draggable]="false"
+>
+  <ng-template pTemplate="body">
+    <comp-setting></comp-setting>
+  </ng-template>
   <ng-template pTemplate="footer">
-    <p-button icon="pi pi-check" (click)="displayModal=false" label="Ok" styleClass="p-button-text"></p-button>
-    </ng-template>
+    <p-button
+      icon="pi pi-check"
+      (click)="displayModal = false"
+      label="Save"
+      styleClass="p-button-text"
+    ></p-button>
+  </ng-template>
 </p-dialog>

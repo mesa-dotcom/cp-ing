@@ -7,12 +7,15 @@ export class SettingService {
   private setting: {[key: string] : Partial<{ show: boolean, default: any}>} = {
     gw: {
       show: true,
+      default: false,
     },
     sc: {
       show: true,
+      default: true,
     },
     got: {
       show: true,
+      default: false,
     },
     pos: {
       show: true,
@@ -25,6 +28,22 @@ export class SettingService {
     pda: {
       show: true,
       default: 2
+    },
+    printer: {
+      show: true,
+      default: 1,
+    },
+    cctv: {
+      show: true,
+      default: 1,
+    },
+    ups: {
+      show: true,
+      default: 1,
+    },
+    edc: {
+      show: true,
+      default: 1,
     }
   }
   constructor() { }

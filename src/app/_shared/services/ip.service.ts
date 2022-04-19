@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DevicePriority, ErrorMsg, LimitedNumberDevice } from '../constants';
+import { DevicePriority, ErrorMsg, LimitedNumberDevice, UniqueDevices } from '../constants';
 import { DeviceType } from '../enums';
 import { Device } from '../models';
 import { InputHandlerService } from './input-handler.service';
@@ -8,11 +8,6 @@ import { InputHandlerService } from './input-handler.service';
   providedIn: 'root',
 })
 export class IpService {
-  private readonly UniqueDevices: DeviceType[] = [
-    DeviceType.SC,
-    DeviceType.GOT,
-    DeviceType.GW,
-  ];
   constructor(private _inputHandlerService: InputHandlerService) {}
 
   public createDevicesOfStores<T>(
@@ -40,7 +35,7 @@ export class IpService {
     const domain = this.generateDomain(storeId);
     const devices: Device[] = [];
     Object.keys(devicesOfStore).forEach((key) => {
-      if (this.UniqueDevices.includes(key as DeviceType)) {
+      if (UniqueDevices.includes(key as DeviceType)) {
         devicesOfStore[key]
           ? devices.push(this.generateIP(domain, key as DeviceType, null))
           : void 0;
