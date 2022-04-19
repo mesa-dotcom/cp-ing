@@ -12,7 +12,10 @@
       <td>{{ deviceFullName[k] }}</td>
       <td>{{ deviceAbbr[k] }}</td>
       <td>
-        <p-inputSwitch [(ngModel)]="setting[k].show"></p-inputSwitch>
+        <p-inputSwitch
+          [(ngModel)]="setting[k].show"
+          (onChange)="valueChanged()"
+        ></p-inputSwitch>
       </td>
       <td [class]="setting[k].show ? '' : 'pointer-events-none opacity-60'">
         <ng-container *ngIf="uniqueDevice.includes(k); else elseTemplate">
@@ -21,6 +24,7 @@
             [value]="true"
             [inputId]="k + '_true'"
             [(ngModel)]="setting[k].default"
+            (onClick)="valueChanged()"
           ></p-radioButton>
           <label class="ml-1 mr-3" [for]="k + '_true'">True</label>
           <p-radioButton
@@ -28,11 +32,18 @@
             [value]="false"
             [inputId]="k + '_false'"
             [(ngModel)]="setting[k].default"
+            (onClick)="valueChanged()"
           ></p-radioButton>
           <label class="ml-1 mr-3" [for]="k + '_false'">False</label>
         </ng-container>
         <ng-template #elseTemplate>
-          <p-inputNumber [(ngModel)]="setting[k].default" [showButtons]="true" [min]="1" [max]="limitedNumberDevice[k]">
+          <p-inputNumber
+            [(ngModel)]="setting[k].default"
+            [showButtons]="true"
+            [min]="1"
+            [max]="limitedNumberDevice[k]"
+            (onInput)="valueChanged()"
+          >
           </p-inputNumber>
         </ng-template>
       </td>

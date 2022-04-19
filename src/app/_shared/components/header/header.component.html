@@ -30,14 +30,15 @@
   [draggable]="false"
 >
   <ng-template pTemplate="body">
-    <comp-setting [isOpen]="displayModal"></comp-setting>
+    <comp-setting [isOpen]="displayModal" (settingChanged)="settingChanged($event)"></comp-setting>
   </ng-template>
   <ng-template pTemplate="footer">
     <p-button
       icon="pi pi-check"
-      (click)="displayModal = false"
+      (click)="saveSetting()"
       label="Save"
       styleClass="p-button-text"
     ></p-button>
   </ng-template>
 </p-dialog>
+<p-toast></p-toast>

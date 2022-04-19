@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import {
   DeviceABBR,
@@ -15,6 +15,7 @@ import { SettingService } from '../../services/setting.service';
 })
 export class SettingComponent implements OnInit, OnChanges {
   @Input() isOpen: boolean = false;
+  @Output() settingChanged: EventEmitter<any> = new EventEmitter()
   setting: any = {};
   keys: string[] = [];
   deviceFullName = DeviceFullName;
@@ -30,6 +31,10 @@ export class SettingComponent implements OnInit, OnChanges {
       this.setting = x;
       this.keys = Object.keys(x)
     })
+  }
+
+  valueChanged() {
+    this.settingChanged.emit(this.setting);
   }
 
   ngOnInit(): void {}

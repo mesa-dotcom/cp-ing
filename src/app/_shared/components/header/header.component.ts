@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { SettingService } from '../../services/setting.service';
 
 @Component({
   selector: 'comp-header',
@@ -10,9 +11,11 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 })
 export class HeaderComponent implements OnInit {
   webTitle: string = 'CP-ing';
+  private _setting_data = {}
   constructor(
     public dialogService: DialogService,
-    public messageService: MessageService
+    public messageService: MessageService,
+    private _settingService: SettingService,
   ) {}
   displayModal: boolean = false;
 
@@ -23,6 +26,29 @@ export class HeaderComponent implements OnInit {
   }
 
   settingChanged(e: any) {
-    console.log(e);
+    this._setting_data = e
+  }
+
+  saveSetting() {
+    if (Object.keys(this._setting_data).length !== 0) {
+      try {
+        this._settingService.saveSetting(this._setting_data).subscribe((res) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Setting saved',
+          });
+          this.displayModal = false;
+        })
+      } catch (error) {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Setting not saved',
+        });
+      }
+    } else {
+      this.displayModal = false
+    }
   }
 }

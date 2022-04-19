@@ -55,4 +55,8 @@ export class SettingService {
   getSetting() {
     return this._http.get('/api/setting');
   }
+
+  saveSetting(setting: any) {
+    return this._http.post('/api/setting', { setting });
+  }
 }
