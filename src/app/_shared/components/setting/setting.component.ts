@@ -6,6 +6,7 @@ import {
   LimitedNumberDevice,
   UniqueDevices,
 } from '../../constants';
+import { DeviceType } from '../../enums';
 import { SettingService } from '../../services/setting.service';
 
 @Component({
@@ -28,8 +29,8 @@ export class SettingComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void {
     this._settingService.getSetting().subscribe(x => {
+      this.keys = Object.values(DeviceType)
       this.setting = x;
-      this.keys = Object.keys(x)
     })
   }
 

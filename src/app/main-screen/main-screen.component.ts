@@ -5,6 +5,8 @@ import { DeviceFullName } from '../_shared/constants';
 import { MessageService } from 'primeng/api';
 import { IpService } from '../_shared/services/ip.service';
 import { ErrorMsg } from '../_shared/constants/error-message';
+import { Subscription } from 'rxjs';
+import { SettingService } from '../_shared/services/setting.service';
 
 @Component({
   selector: 'comp-main-screen',
@@ -19,15 +21,11 @@ export class MainScreenComponent {
   };
   public deviceFullName = DeviceFullName;
   public store: FormGroup;
-  public upsOption: Array<{ name: string; value: number }> = [
-    { name: '1', value: 1 },
-    { name: '2', value: 2 },
-  ];
   constructor(
     private _ipService: IpService,
     private _fb: FormBuilder,
     private _router: Router,
-    private _messageService: MessageService
+    private _messageService: MessageService,
   ) {
     this.store = this._fb.group({
       id: ['', Validators.required],
