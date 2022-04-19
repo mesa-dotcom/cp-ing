@@ -12,7 +12,8 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { DialogModule } from 'primeng/dialog';
 import { RadioButtonModule } from 'primeng/radiobutton';
-import { SliderModule } from 'primeng/slider';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 const PRIMENG_MODULE = [
   CardModule,
@@ -29,7 +30,8 @@ const PRIMENG_MODULE = [
   MessageModule,
   DialogModule,
   RadioButtonModule,
-  SliderModule
+  InputSwitchModule,
+  InputNumberModule,
 ];
 
 export default PRIMENG_MODULE;

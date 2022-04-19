@@ -12,7 +12,7 @@
       <td>{{ deviceFullName[k] }}</td>
       <td>{{ deviceAbbr[k] }}</td>
       <td>
-        <p-checkbox [binary]="true" [(ngModel)]="setting[k].show"></p-checkbox>
+        <p-inputSwitch [(ngModel)]="setting[k].show"></p-inputSwitch>
       </td>
       <td [class]="setting[k].show ? '' : 'pointer-events-none opacity-60'">
         <ng-container *ngIf="uniqueDevice.includes(k); else elseTemplate">
@@ -32,13 +32,8 @@
           <label class="ml-1 mr-3" [for]="k + '_false'">False</label>
         </ng-container>
         <ng-template #elseTemplate>
-          <h5>{{ setting[k].default }}</h5>
-          <p-slider
-            [(ngModel)]="setting[k].default"
-            [min]="1"
-            [max]="limitedNumberDevice[k]"
-            [step]="1"
-          ></p-slider>
+          <p-inputNumber [(ngModel)]="setting[k].default" [showButtons]="true" [min]="1" [max]="limitedNumberDevice[k]">
+          </p-inputNumber>
         </ng-template>
       </td>
     </tr>

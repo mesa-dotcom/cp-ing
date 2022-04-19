@@ -1,10 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SettingService {
-  private setting: {[key: string] : Partial<{ show: boolean, default: any}>} = {
+  private setting: Observable<{
+    [key: string]: Partial<{ show: boolean; default: any }>;
+  }> = of({
     gw: {
       show: true,
       default: false,
@@ -19,15 +23,15 @@ export class SettingService {
     },
     pos: {
       show: true,
-      default: 3
+      default: 3,
     },
     ap: {
       show: true,
-      default: 2
+      default: 2,
     },
     pda: {
       show: true,
-      default: 2
+      default: 2,
     },
     printer: {
       show: true,
@@ -44,11 +48,11 @@ export class SettingService {
     edc: {
       show: true,
       default: 1,
-    }
-  }
-  constructor() { }
+    },
+  });
+  constructor(private _http: HttpClient) {}
 
   getSetting() {
-    return this.setting
+    return this._http.get('/api/setting');
   }
 }
