@@ -15,7 +15,7 @@ export class ResultComponent implements OnInit {
   public storeId: string = '30001';
   public deviceAbbr = DeviceABBR;
   public deviceFullName = DeviceFullName;
-  public ipsDevices: any[] = []
+  public ipsDevices: any[] = [];
   public results: {
     device: DeviceType;
     storeId: string;
@@ -26,11 +26,22 @@ export class ResultComponent implements OnInit {
   constructor(private _router: Router, private _pingService: PingService) {
     this.ipsDevices =
       this._router.getCurrentNavigation()?.extras?.state?.['data'] || [];
+    this.pingAll();
+  }
+
+  pingAll() {
     this.ipsDevices.forEach((store: any) => {
       store.devices.forEach((device: Device) => {
-        this._pingService.pingDevice(device)
+        this.pingDevice(device);
       });
-    })
+    });
+  }
+
+  pingDevice(d: Device) {
+    this._pingService.pingDevice(d).subscribe((res: any) => {
+      d.status.unshift(res.alive ? 'success' : 'failed');
+      d.status.pop();
+    });
   }
 
   ngOnInit(): void {
@@ -45,12 +56,13 @@ export class ResultComponent implements OnInit {
 
   rePing(d: Device) {
     d.status = Array(4).fill('pending');
-    this._pingService.pingDevice(d);
+    this._pingService.pingDevice(d).subscribe((res: any) => {
+      d.status.unshift(res.alive ? 'success' : 'failed');
+      d.status.pop();
+    });
   }
 
-  rePingAll() {
-
-  }
+  rePingAll() {}
 
   // pingAll() {
   //   this.results.forEach((r) => {

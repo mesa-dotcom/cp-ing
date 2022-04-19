@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { SettingService } from '../../services/setting.service';
@@ -11,11 +12,12 @@ import { SettingService } from '../../services/setting.service';
 })
 export class HeaderComponent implements OnInit {
   webTitle: string = 'CP-ing';
-  private _setting_data = {}
+  private _setting_data = {};
   constructor(
     public dialogService: DialogService,
     public messageService: MessageService,
     private _settingService: SettingService,
+    private _router: Router
   ) {}
   displayModal: boolean = false;
 
@@ -26,20 +28,28 @@ export class HeaderComponent implements OnInit {
   }
 
   settingChanged(e: any) {
-    this._setting_data = e
+    this._setting_data = e;
   }
 
   saveSetting() {
     if (Object.keys(this._setting_data).length !== 0) {
       try {
-        this._settingService.saveSetting(this._setting_data).subscribe((res) => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: 'Setting saved',
+        this._settingService
+          .saveSetting(this._setting_data)
+          .subscribe((res) => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: 'Setting saved',
+            });
+            this.displayModal = false;
+            if (this._router.url === '/') {
+              this._router.navigateByUrl('/result')
+            } else {
+              this._router.navigateByUrl('/')
+            }
+
           });
-          this.displayModal = false;
-        })
       } catch (error) {
         this.messageService.add({
           severity: 'error',
@@ -48,7 +58,7 @@ export class HeaderComponent implements OnInit {
         });
       }
     } else {
-      this.displayModal = false
+      this.displayModal = false;
     }
   }
 }

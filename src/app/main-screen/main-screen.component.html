@@ -10,119 +10,139 @@
     </div>
     <h5>Devices:</h5>
     <div class="grid align-items-center">
-      <div class="field-checkbox pr-6 pl-2">
+      <div *ngIf="setting['gw'].show" class="field-checkbox pr-6 pl-2">
         <p-checkbox formControlName="gw" name="gw" id="gw" [binary]="true">
         </p-checkbox>
         <label for="gw" class="text-center">Gateway</label>
       </div>
-      <div class="field-checkbox pr-6">
+      <div *ngIf="setting['sc'].show" class="field-checkbox pr-6 pl-2">
         <p-checkbox formControlName="sc" name="sc" id="sc" [binary]="true">
         </p-checkbox>
         <label for="sc" class="text-center">SC</label>
       </div>
-      <div class="field-checkbox">
+      <div *ngIf="setting['got'].show" class="field-checkbox pr-6 pl-2">
         <p-checkbox formControlName="got" name="got" id="got" [binary]="true">
         </p-checkbox>
         <label for="got" class="text-center">GOT Tablet</label>
       </div>
       <div class="col-12 grid">
-        <div class="{{ styleClass['label'] }}">
-          <label for="pos">POS</label>
+        <div *ngIf="setting['pos'].show" class="{{ styleClass['wrapper']}}">
+          <div class="{{ styleClass['label'] }}">
+            <label for="pos">POS</label>
+          </div>
+          <div class="{{ styleClass['input'] }}">
+            <input
+              type="text"
+              [style]="{ width: '100%' }"
+              pInputText
+              formControlName="pos"
+              name="pos"
+              id="pos"
+            />
+          </div>
         </div>
-        <div class="{{ styleClass['input'] }}">
-          <input
-            type="text"
-            [style]="{ width: '100%' }"
-            pInputText
-            formControlName="pos"
-            name="pos"
-            id="pos"
-          />
+        <div *ngIf="setting['ap'].show" class="{{ styleClass['wrapper']}}">
+          <div class="{{ styleClass['label'] }}">
+            <label for="ap">AP</label>
+          </div>
+          <div class="{{ styleClass['input'] }}">
+            <input
+              type="text"
+              [style]="{ width: '100%' }"
+              pInputText
+              formControlName="ap"
+              name="ap"
+              id="ap"
+            />
+          </div>
         </div>
-        <div class="{{ styleClass['label'] }}">
-          <label for="ap">AP</label>
+        <div *ngIf="setting['pda'].show" class="{{ styleClass['wrapper']}}">
+          <div class="{{ styleClass['label'] }}">
+            <label for="pda">PDA</label>
+          </div>
+          <div class="{{ styleClass['input'] }}">
+            <input
+              type="text"
+              [style]="{ width: '100%' }"
+              pInputText
+              formControlName="pda"
+              name="pda"
+              id="pda"
+            />
+          </div>
         </div>
-        <div class="{{ styleClass['input'] }}">
-          <input
-            type="text"
-            [style]="{ width: '100%' }"
-            pInputText
-            formControlName="ap"
-            name="ap"
-            id="ap"
-          />
+        <div *ngIf="setting['printer'].show" class="{{ styleClass['wrapper']}}">
+          <div class="{{ styleClass['label'] }}">
+            <label for="printer">Printer</label>
+          </div>
+          <div class="{{ styleClass['input'] }}">
+            <input
+              type="text"
+              [style]="{ width: '100%' }"
+              pInputText
+              formControlName="printer"
+              name="printer"
+              id="printer"
+            />
+          </div>
         </div>
-        <div class="{{ styleClass['label'] }}">
-          <label for="pda">PDA</label>
+        <div *ngIf="setting['cctv'].show" class="{{ styleClass['wrapper']}}">
+          <div class="{{ styleClass['label'] }}">
+            <label for="cctv">CCTV</label>
+          </div>
+          <div class="{{ styleClass['input'] }}">
+            <input
+              type="text"
+              [style]="{ width: '100%' }"
+              pInputText
+              formControlName="cctv"
+              name="cctv"
+              id="cctv"
+            />
+          </div>
         </div>
-        <div class="{{ styleClass['input'] }}">
-          <input
-            type="text"
-            [style]="{ width: '100%' }"
-            pInputText
-            formControlName="pda"
-            name="pda"
-            id="pda"
-          />
+        <div *ngIf="setting['ups'].show" class="{{ styleClass['wrapper']}}">
+          <div class="{{ styleClass['label'] }}">
+            <label for="ups">UPS</label>
+          </div>
+          <div class="{{ styleClass['input'] }}">
+            <input
+              type="text"
+              [style]="{ width: '100%' }"
+              pInputText
+              formControlName="ups"
+              name="ups"
+              id="ups"
+            />
+          </div>
         </div>
-        <div class="{{ styleClass['label'] }}">
-          <label for="printer">Printer</label>
-        </div>
-        <div class="{{ styleClass['input'] }}">
-          <input
-            type="text"
-            [style]="{ width: '100%' }"
-            pInputText
-            formControlName="printer"
-            name="printer"
-            id="printer"
-          />
-        </div>
-        <div class="{{ styleClass['label'] }}">
-          <label for="cctv">CCTV</label>
-        </div>
-        <div class="{{ styleClass['input'] }}">
-          <input
-            type="text"
-            [style]="{ width: '100%' }"
-            pInputText
-            formControlName="cctv"
-            name="cctv"
-            id="cctv"
-          />
-        </div>
-        <div class="{{ styleClass['label'] }}">
-          <label for="ups">UPS</label>
-        </div>
-        <div class="{{ styleClass['input'] }}">
-          <input
-            type="text"
-            [style]="{ width: '100%' }"
-            pInputText
-            formControlName="ups"
-            name="ups"
-            id="ups"
-          />
-        </div>
-        <div class="{{ styleClass['label'] }}">
-          <label for="edc">EDC</label>
-        </div>
-        <div class="{{ styleClass['input'] }}">
-          <input
-            type="text"
-            [style]="{ width: '100%' }"
-            pInputText
-            formControlName="edc"
-            name="edc"
-            id="edc"
-          />
+        <div *ngIf="setting['edc'].show" class="{{ styleClass['wrapper']}}">
+          <div class="{{ styleClass['label'] }}">
+            <label for="edc">EDC</label>
+          </div>
+          <div class="{{ styleClass['input'] }}">
+            <input
+              type="text"
+              [style]="{ width: '100%' }"
+              pInputText
+              formControlName="edc"
+              name="edc"
+              id="edc"
+            />
+          </div>
         </div>
       </div>
     </div>
     <ng-template pTemplate="footer">
-      <button pButton type="button" label="Reset Form" (click)="clearInput()" class="p-button-secondary mr-2"></button>
+      <button
+        pButton
+        type="button"
+        label="Reset Form"
+        (click)="clearInput()"
+        class="p-button-secondary mr-2"
+      ></button>
       <button pButton type="button" label="Ping" (click)="toResult()"></button>
     </ng-template>
   </p-card>
- <p-toast position="top-right"></p-toast>
+  <p-toast position="top-right"></p-toast>
 </form>

@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DeviceFullName } from '../_shared/constants';
+import { DeviceFullName, UniqueDevices } from '../_shared/constants';
 import { MessageService } from 'primeng/api';
 import { IpService } from '../_shared/services/ip.service';
 import { ErrorMsg } from '../_shared/constants/error-message';
 import { Subscription } from 'rxjs';
 import { SettingService } from '../_shared/services/setting.service';
+import { DeviceType } from '../_shared/enums';
 
 @Component({
   selector: 'comp-main-screen',
@@ -16,29 +17,94 @@ import { SettingService } from '../_shared/services/setting.service';
 })
 export class MainScreenComponent {
   public styleClass: { [key: string]: string } = {
-    label: 'xl:col-1 lg:col-1 md:col-2 align-self-center',
-    input: 'xl:col-2 lg:col-3 md:col-4',
+    wrapper: 'xl:col-3 lg:col-4 md:col-6 grid align-items-center',
+    label: 'xl:col-3 lg:col-4 md:col-6 align-self-center',
+    input: 'xl:col-9 lg:col-8 md:col-6',
   };
   public deviceFullName = DeviceFullName;
+  public uniqueDevices = UniqueDevices;
   public store: FormGroup;
+  public setting: any = {
+    gw: {
+      show: true,
+      default: false,
+    },
+    sc: {
+      show: true,
+      default: true,
+    },
+    got: {
+      show: true,
+      default: false,
+    },
+    pos: {
+      show: true,
+      default: 3,
+    },
+    ap: {
+      show: true,
+      default: 2,
+    },
+    pda: {
+      show: true,
+      default: 2,
+    },
+    printer: {
+      show: true,
+      default: 1,
+    },
+    cctv: {
+      show: true,
+      default: 1,
+    },
+    ups: {
+      show: true,
+      default: 1,
+    },
+    edc: {
+      show: true,
+      default: 1,
+    },
+  };
   constructor(
     private _ipService: IpService,
     private _fb: FormBuilder,
     private _router: Router,
     private _messageService: MessageService,
+    private _settingService: SettingService
   ) {
     this.store = this._fb.group({
       id: ['', Validators.required],
       gw: false,
-      sc: true,
+      sc: false,
       got: false,
-      pos: '1-3',
-      ap: '1,2',
-      pda: '1,2',
-      printer: '1',
-      ups: '1',
-      cctv: '1',
+      pos: '',
+      ap: '',
+      pda: '',
+      printer: '',
+      ups: '',
+      cctv: '',
       edc: '',
+    });
+    this._settingService.getSetting().subscribe((x) => {
+      this.setting = x;
+      this.setFormControl();
+    });
+  }
+
+  setFormControl() {
+    Object.keys(this.setting).forEach((k) => {
+      if (this.uniqueDevices.includes(k as DeviceType)) {
+        this.store.controls[k].setValue(
+          this.setting[k].show ? this.setting[k].default : false
+        );
+      } else {
+        this.store.controls[k].setValue(
+          this.setting[k].show
+            ? this.convertOutput(this.setting[k].default)
+            : ''
+        );
+      }
     });
   }
 
@@ -87,5 +153,15 @@ export class MainScreenComponent {
 
   clear() {
     this._messageService.clear();
+  }
+
+  convertOutput(n: number): string {
+    if (n === 0) {
+      return '';
+    } else if (n === 1) {
+      return '1';
+    } else {
+      return `1-${n}`;
+    }
   }
 }

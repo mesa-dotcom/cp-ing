@@ -14,13 +14,7 @@ export class PingService {
   }
 
   public pingDevice(device: Device) {
-    this._http
-      .post('/api/ping', { ip: device.ip })
-      .pipe(repeat(4))
-      .subscribe((res: any) => {
-        device.status.unshift(res.alive ? 'success' : 'failed');
-        device.status.pop();
-      });
+    return this._http.post('/api/ping', { ip: device.ip }).pipe(repeat(4));
   }
 
   public pingRepeat(ip: string, times: number = 4): Observable<any> {
