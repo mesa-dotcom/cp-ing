@@ -112,10 +112,6 @@ export class MainScreenComponent {
     return this.store.controls['id'].value;
   }
 
-  get ups() {
-    return this.store.controls['ups'].value;
-  }
-
   clearInput() {
     this.store.reset();
     this.store.controls['id'].setValue('');
@@ -160,6 +156,8 @@ export class MainScreenComponent {
       return '';
     } else if (n === 1) {
       return '1';
+    } else if (n === 2) {
+      return '1,2';
     } else {
       return `1-${n}`;
     }

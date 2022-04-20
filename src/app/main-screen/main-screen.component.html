@@ -2,13 +2,15 @@
   <p-card header="Ping Form">
     <div class="grid align-items-center">
       <div class="col-2">
-        <h5>Store/Stores:</h5>
+        <h4>Store/Stores:</h4>
       </div>
       <div class="col-10">
         <input type="text" pInputText formControlName="id" />
       </div>
+      <div class="col-2">
+        <h4>Devices:</h4>
+      </div>
     </div>
-    <h5>Devices:</h5>
     <div class="grid align-items-center">
       <div *ngIf="setting['gw'].show" class="field-checkbox pr-6 pl-2">
         <p-checkbox formControlName="gw" name="gw" id="gw" [binary]="true">
@@ -26,7 +28,7 @@
         <label for="got" class="text-center">GOT Tablet</label>
       </div>
       <div class="col-12 grid">
-        <div *ngIf="setting['pos'].show" class="{{ styleClass['wrapper']}}">
+        <div *ngIf="setting['pos'].show" class="{{ styleClass['wrapper'] }}">
           <div class="{{ styleClass['label'] }}">
             <label for="pos">POS</label>
           </div>
@@ -41,7 +43,7 @@
             />
           </div>
         </div>
-        <div *ngIf="setting['ap'].show" class="{{ styleClass['wrapper']}}">
+        <div *ngIf="setting['ap'].show" class="{{ styleClass['wrapper'] }}">
           <div class="{{ styleClass['label'] }}">
             <label for="ap">AP</label>
           </div>
@@ -56,7 +58,7 @@
             />
           </div>
         </div>
-        <div *ngIf="setting['pda'].show" class="{{ styleClass['wrapper']}}">
+        <div *ngIf="setting['pda'].show" class="{{ styleClass['wrapper'] }}">
           <div class="{{ styleClass['label'] }}">
             <label for="pda">PDA</label>
           </div>
@@ -71,7 +73,10 @@
             />
           </div>
         </div>
-        <div *ngIf="setting['printer'].show" class="{{ styleClass['wrapper']}}">
+        <div
+          *ngIf="setting['printer'].show"
+          class="{{ styleClass['wrapper'] }}"
+        >
           <div class="{{ styleClass['label'] }}">
             <label for="printer">Printer</label>
           </div>
@@ -86,7 +91,7 @@
             />
           </div>
         </div>
-        <div *ngIf="setting['cctv'].show" class="{{ styleClass['wrapper']}}">
+        <div *ngIf="setting['cctv'].show" class="{{ styleClass['wrapper'] }}">
           <div class="{{ styleClass['label'] }}">
             <label for="cctv">CCTV</label>
           </div>
@@ -101,7 +106,7 @@
             />
           </div>
         </div>
-        <div *ngIf="setting['ups'].show" class="{{ styleClass['wrapper']}}">
+        <div *ngIf="setting['ups'].show" class="{{ styleClass['wrapper'] }}">
           <div class="{{ styleClass['label'] }}">
             <label for="ups">UPS</label>
           </div>
@@ -116,7 +121,7 @@
             />
           </div>
         </div>
-        <div *ngIf="setting['edc'].show" class="{{ styleClass['wrapper']}}">
+        <div *ngIf="setting['edc'].show" class="{{ styleClass['wrapper'] }}">
           <div class="{{ styleClass['label'] }}">
             <label for="edc">EDC</label>
           </div>
