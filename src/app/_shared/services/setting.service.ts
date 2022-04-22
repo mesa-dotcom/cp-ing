@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, share } from 'rxjs';
+import { Observable, share } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +8,7 @@ import { Observable, of, share } from 'rxjs';
 export class SettingService {
   private setting!: Observable<any>;
   constructor(private _http: HttpClient) {
-    this.setting = this._http.get('/api/setting').pipe(share())
+    this.setting = this._http.get('http://localhost:3000/setting').pipe(share())
   }
 
   getSetting() {
@@ -16,6 +16,6 @@ export class SettingService {
   }
 
   saveSetting(setting: any) {
-    return this._http.post('/api/setting', { setting });
+    return this._http.post('http://localhost:3000/setting', { setting });
   }
 }
