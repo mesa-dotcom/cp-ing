@@ -96,7 +96,7 @@ export class IpService {
         device.ip = `${domain}.146`;
         break;
       case DeviceType.PRINTER:
-        device.ip = `${domain}.12${no}`;
+        device.ip = `${domain}.121`;
         break;
       default:
         device.ip = `${domain}.110`;

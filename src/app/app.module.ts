@@ -10,24 +10,24 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './_shared/components/footer/footer.component';
 import { HeaderComponent } from './_shared/components/header/header.component';
-import { GitIgnoreDirective } from './_shared/directives/git-ignore.directive';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 
 import PRIMENG_MODULE from './modules/prime-ng';
 import { ResultComponent } from './result/result.component';
 import { PlayGroundComponent } from './play-ground/play-ground.component';
 import { SettingComponent } from './_shared/components/setting/setting.component';
+import { OnlyNCDDirective } from './_shared/directives/only-ncd.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
     HeaderComponent,
-    GitIgnoreDirective,
     MainScreenComponent,
     ResultComponent,
     PlayGroundComponent,
     SettingComponent,
+    OnlyNCDDirective,
   ],
   imports: [
     BrowserModule,
