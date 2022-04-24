@@ -17,6 +17,7 @@ import { ResultComponent } from './result/result.component';
 import { PlayGroundComponent } from './play-ground/play-ground.component';
 import { SettingComponent } from './_shared/components/setting/setting.component';
 import { OnlyNCDDirective } from './_shared/directives/only-ncd.directive';
+import { InputFormComponent } from './_shared/components/input-form/input-form.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { OnlyNCDDirective } from './_shared/directives/only-ncd.directive';
     PlayGroundComponent,
     SettingComponent,
     OnlyNCDDirective,
+    InputFormComponent,
   ],
   imports: [
     BrowserModule,

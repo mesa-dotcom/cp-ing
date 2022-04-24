@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DeviceFullName, UniqueDevices } from '../_shared/constants';
+import {
+  DeviceABBR,
+  DeviceFullName,
+  LimitedNumberDevice,
+  UniqueDevices,
+} from '../_shared/constants';
 import { MessageService } from 'primeng/api';
 import { IpService } from '../_shared/services/ip.service';
 import { ErrorMsg } from '../_shared/constants/error-message';
-import { Subscription } from 'rxjs';
+import { range, Subscription } from 'rxjs';
 import { SettingService } from '../_shared/services/setting.service';
 import { DeviceType } from '../_shared/enums';
 
@@ -22,6 +27,7 @@ export class MainScreenComponent {
     input: 'xl:col-9 lg:col-8 md:col-6',
   };
   public deviceFullName = DeviceFullName;
+  deviceAbbr = DeviceABBR;
   public uniqueDevices = UniqueDevices;
   public store: FormGroup;
   public setting: any = {
@@ -151,15 +157,7 @@ export class MainScreenComponent {
     this._messageService.clear();
   }
 
-  convertOutput(n: number): string {
-    if (n === 0) {
-      return '';
-    } else if (n === 1) {
-      return '1';
-    } else if (n === 2) {
-      return '1,2';
-    } else {
-      return `1-${n}`;
-    }
+  convertOutput(n: number): number[] {
+    return Array.from({ length: n }, (_, i) => i + 1);
   }
 }
