@@ -5,7 +5,7 @@
         <h4>Store/Stores:</h4>
       </div>
       <div class="col-10">
-        <input type="text" pInputText formControlName="id" placeholder="30001 or 30001,30002"/>
+        <input type="text" pInputText formControlName="id" placeholder="30001 or 30001,30002" />
       </div>
       <div class="col-2">
         <h4>Devices:</h4>
@@ -27,125 +27,21 @@
         </p-checkbox>
         <label for="got" class="text-center">GOT Tablet</label>
       </div>
-      <div class="col-12 grid">
-        <div *ngIf="setting['pos'].show" class="{{ styleClass['wrapper'] }}">
-          <div class="{{ styleClass['label'] }}">
-            <label for="pos">POS</label>
-          </div>
-          <div class="{{ styleClass['input'] }}">
-            <input
-              type="text"
-              [style]="{ width: '100%' }"
-              pInputText
-              formControlName="pos"
-              name="pos"
-              id="pos"
-            />
-          </div>
-        </div>
-        <div *ngIf="setting['ap'].show" class="{{ styleClass['wrapper'] }}">
-          <div class="{{ styleClass['label'] }}">
-            <label for="ap">AP</label>
-          </div>
-          <div class="{{ styleClass['input'] }}">
-            <input
-              type="text"
-              [style]="{ width: '100%' }"
-              pInputText
-              formControlName="ap"
-              name="ap"
-              id="ap"
-            />
-          </div>
-        </div>
-        <div *ngIf="setting['pda'].show" class="{{ styleClass['wrapper'] }}">
-          <div class="{{ styleClass['label'] }}">
-            <label for="pda">PDA</label>
-          </div>
-          <div class="{{ styleClass['input'] }}">
-            <input
-              type="text"
-              [style]="{ width: '100%' }"
-              pInputText
-              formControlName="pda"
-              name="pda"
-              id="pda"
-            />
-          </div>
-        </div>
-        <div
-          *ngIf="setting['printer'].show"
-          class="{{ styleClass['wrapper'] }}"
-        >
-          <div class="{{ styleClass['label'] }}">
-            <label for="printer">Printer</label>
-          </div>
-          <div class="{{ styleClass['input'] }}">
-            <input
-              type="text"
-              [style]="{ width: '100%' }"
-              pInputText
-              formControlName="printer"
-              name="printer"
-              id="printer"
-            />
-          </div>
-        </div>
-        <div *ngIf="setting['cctv'].show" class="{{ styleClass['wrapper'] }}">
-          <div class="{{ styleClass['label'] }}">
-            <label for="cctv">CCTV</label>
-          </div>
-          <div class="{{ styleClass['input'] }}">
-            <input
-              type="text"
-              [style]="{ width: '100%' }"
-              pInputText
-              formControlName="cctv"
-              name="cctv"
-              id="cctv"
-            />
-          </div>
-        </div>
-        <div *ngIf="setting['ups'].show" class="{{ styleClass['wrapper'] }}">
-          <div class="{{ styleClass['label'] }}">
-            <label for="ups">UPS</label>
-          </div>
-          <div class="{{ styleClass['input'] }}">
-            <input
-              type="text"
-              [style]="{ width: '100%' }"
-              pInputText
-              formControlName="ups"
-              name="ups"
-              id="ups"
-            />
-          </div>
-        </div>
-        <div *ngIf="setting['edc'].show" class="{{ styleClass['wrapper'] }}">
-          <div class="{{ styleClass['label'] }}">
-            <label for="edc">EDC</label>
-          </div>
-          <div class="{{ styleClass['input'] }}">
-            <input
-              type="text"
-              [style]="{ width: '100%' }"
-              pInputText
-              formControlName="edc"
-              name="edc"
-              id="edc"
-            />
-          </div>
-        </div>
-      </div>
+      <comp-input-form class="col-12 grid" *ngIf="setting['pos'].show" [formGroup]="store" [deviceName]="'pos'">
+      </comp-input-form>
+      <comp-input-form class="col-12 grid" *ngIf="setting['ap'].show" [formGroup]="store" [deviceName]="'ap'">
+      </comp-input-form>
+      <comp-input-form class="col-12 grid" *ngIf="setting['pda'].show" [formGroup]="store" [deviceName]="'pda'">
+      </comp-input-form>
+      <comp-input-form class="col-12 grid" *ngIf="setting['cctv'].show" [formGroup]="store" [deviceName]="'cctv'">
+      </comp-input-form>
+      <comp-input-form class="col-12 grid" *ngIf="setting['ups'].show" [formGroup]="store" [deviceName]="'ups'">
+      </comp-input-form>
+      <comp-input-form class="col-12 grid" *ngIf="setting['edc'].show" [formGroup]="store" [deviceName]="'edc'">
+      </comp-input-form>
     </div>
     <ng-template pTemplate="footer">
-      <button
-        pButton
-        type="button"
-        label="Reset Form"
-        (click)="clearInput()"
-        class="p-button-secondary mr-2"
-      ></button>
+      <button pButton type="button" label="Reset Form" (click)="clearInput()" class="p-button-secondary mr-2"></button>
       <button pButton type="button" label="Ping" (click)="toResult()"></button>
     </ng-template>
   </p-card>

@@ -1,3 +1,18 @@
-<p-multiSelect [options]="options" optionLabel="name" optionValue="value" [(ngModel)]="tvalue"
-  [selectedItemsLabel]="'{0} '+ deviceAbbr[deviceName] + ' is selected'">
-</p-multiSelect>
+<div [formGroup]="formGroup" class="col-12 grid">
+  <ng-container *ngIf="uniqueDevices.includes(deviceName); else elseTemplate">
+    <div class="field-checkbox pr-6 pl-2">
+      <p-checkbox [formControlName]="deviceName" [name]="deviceName" [id]="deviceName" [binary]="true">
+      </p-checkbox>
+      <label [for]="deviceName" class="text-center">{{ deviceName }}</label>
+    </div>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <div class="{{ styleClass['label'] }}">
+      <label [for]="deviceName">{{ deviceAbbr[deviceName] }}: </label>
+    </div>
+    <p-multiSelect [options]="options" optionLabel="name" optionValue="value" [formControlName]="deviceName"
+      [selectedItemsLabel]="'{0} ' + deviceAbbr[deviceName] + ' is selected'" [name]="deviceName" [id]="deviceName"
+      styleClass="w-5">
+    </p-multiSelect>
+  </ng-template>
+</div>
